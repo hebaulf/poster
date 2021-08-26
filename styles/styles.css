@@ -9,23 +9,25 @@ html {
 
 body {
   max-width: 1200px;
-  min-width: 800px;
+  min-width: 320px;
   margin: 0 auto;
-  background-color: #dfe2d5;
+  background-color: hsl(73.8, 18.3%, 86.1%);
   font-family: "Roboto", sans-serif;
   overflow-x: hidden;
 }
 
-/* Main styles */
+/* Heading styles */
 h1 {
   margin: 0;
-  color: #b90e15;
-  font-size: 179px;
+  color: hsl(357.5, 85.9%, 39%);
+  font-size: 72px;
   line-height: 0.75;
 }
-@media screen and (min-width: 800px) {
+
+/* Styles for scalable font size using calc() in media queries */
+@media screen and (min-width: 320px) {
   h1 {
-    font-size: calc(179px + (269 - 179) * ((100vw - 800px) / (1200 - 800)));
+    font-size: calc(72px + (269 - 72) * ((100vw - 320px) / (1200 - 320)));
   }
 }
 @media screen and (min-width: 1200px) {
@@ -34,13 +36,23 @@ h1 {
   }
 }
 
-/* Section center styles */
+/* Styles for center content using css-grid */
 .center {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
-  grid-template-rows: repeat(2, 1fr);
+  grid-template-rows: 1fr, auto;
   width: 100%;
 }
+
+.center__item.info {
+  padding: 0 10px 30px;
+  min-height: min-content;
+}
+
+.center__item.info p {
+  margin: 0;
+}
+
 .center__item.info--1 {
   grid-column: 1 / 2;
   grid-row: 1 / 2;
@@ -61,6 +73,7 @@ h1 {
   grid-row: 2 / 3;
 }
 
+/* Use of Keyframes to animate a sliding motion of tiles */
 /* Keyframe animation for tiles that are 80% width */
 @-webkit-keyframes slidetile80 {
   0% {
@@ -112,70 +125,89 @@ h1 {
 /* Tile styles and animation */
 .tile__wrap {
   position: relative;
-  height: 50px;
+  height: 28px;
   width: 100%;
-  margin-bottom: 6px;
+  margin-bottom: 4px;
 }
+
+/* Styles for scalable tile height and margin using calc() in media queries  */
+@media screen and (min-width: 320px) {
+  .tile__wrap {
+    height: calc(28px + (50 - 28) * ((100vw - 320px) / (1200 - 320)));
+    margin-bottom: calc(4px + (6 - 4) * ((100vw - 320px) / (1200 - 320)));
+  }
+}
+@media screen and (min-width: 1200px) {
+  .tile__wrap {
+    height: 50px;
+    margin-bottom: 6px;
+  }
+}
+
+/* Basic styles for tiles */
 .tile {
   display: block;
   position: absolute;
   height: 100%;
   width: 100%;
-  background-color: #000008;
+  background-color: hsl(240, 100%, 1.6%);
   animation-iteration-count: infinite;
   animation-direction: alternate;
+  transform: color 1.2s ease-in-out;
 }
 
-.tile--1 {
-  width: 80%;
-  animation-name: slidetile80;
-  animation-duration: 3s;
+/* Hover style for tiles */
+.tile:hover {
+  background-color: hsl(357.5, 85.9%, 39%);
 }
-.tile--2 {
-  width: 80%;
-  right: 0;
-  animation-name: slidetile80;
-  animation-duration: 2s;
-}
-.tile--4 {
-  width: 60%;
-  animation-name: slidetile60;
-  animation-duration: 4s;
-}
-.tile--6 {
-  width: 80%;
-  animation-name: slidetile80;
-  animation-duration: 4.5s;
-}
-.tile--7 {
-  width: 80%;
-  right: 0;
-  animation-name: slidetile80;
-  animation-duration: 5s;
-}
-.tile--9 {
-  width: 60%;
-  animation-name: slidetile60;
-  animation-duration: 3s;
-}
-.tile--12 {
-  width: 60%;
-  animation-name: slidetile60;
-  animation-duration: 2s;
-}
-.tile--14 {
-  width: 80%;
-  animation-name: slidetile80;
-  animation-duration: 3.5s;
-}
+
+/* Styles for tile width and animation used */
+.tile--1,
+.tile--2,
+.tile--6,
+.tile--7,
+.tile--14,
 .tile--15 {
   width: 80%;
-  right: 0;
   animation-name: slidetile80;
-  animation-duration: 4s;
 }
+.tile--4,
+.tile--9,
+.tile--12,
 .tile--17 {
   width: 60%;
   animation-name: slidetile60;
+}
+
+/* Styles for tiles positioned right */
+.tile--2,
+.tile--7,
+.tile--15 {
+  right: 0;
+}
+
+/* Styles for duration of animation for each tile */
+.tile--1,
+.tile--9 {
+  animation-duration: 3s;
+}
+.tile--2,
+.tile--12 {
+  animation-duration: 2s;
+}
+.tile--4,
+.tile--15 {
+  animation-duration: 4s;
+}
+.tile--6 {
+  animation-duration: 4.5s;
+}
+.tile--7 {
+  animation-duration: 5s;
+}
+.tile--14 {
+  animation-duration: 3.5s;
+}
+.tile--17 {
   animation-duration: 2.5s;
 }
